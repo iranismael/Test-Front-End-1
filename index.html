@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Prueba Tecnica carrito de compras Corebiz">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Corebiz Prueba Tecnica </title>
+	
+	<!-- Fontawesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<!-- Boostrap -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+	<!-- Estilos CSS -->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+
+	<!-- CSS Flickity Slider -->
+	<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+
+</head>
+<body>
+	<div class="content-wrap">
+
+		<div class="header-carrito">
+			<nav class="nav">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-4 logo">
+							<img src="img/logo-corebiz.png">
+						</div>
+						<div class="col-sm-4 search">
+							<form>
+							  <div class="form-group">
+							    <input type="text" class="form-control" id="input-search" placeholder="¿Qué estas buscando?">
+							  </div>
+							</form>
+						</div>
+						<div class="col-sm-4 account">
+							<span><a href="#"><i class="fa-regular fa-user"></i> Mi cuenta</a></span>
+							<span><a href="#" onclick="openModalCarrito();"><i class="fa-solid fa-cart-shopping"></i></a></span>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</div>
+
+		<div class="slider">
+			<div class="carousel" data-flickity >
+			    <div class="carousel-cell">
+			        <div class="carousel-content" style="background-image: url('img/compras.webp');">
+				        <div class="carousel-meta">
+				          <p>¡Hola! ¿Qué es lo que buscas?</p>
+				          <h2>Crear o migrar tu comercio electrónico?</h2>
+				        </div>
+			        </div>
+			    </div>
+
+		        <div class="carousel-cell">
+		            <div class="carousel-content" style="background-image: url('img/compras.webp');">
+		    	        <div class="carousel-meta">
+		    	          <p>¡Hola! ¿Qué es lo que buscas?</p>
+		    	          <h2>Crear o migrar tu comercio electrónico?</h2>
+		    	        </div>
+		            </div>
+		        </div>
+
+			</div>
+		</div>
+
+		<div class="container">
+
+			<section class="section-best-sellers">
+				<div class="box-title">
+					<h4>Más Vendidos</h4>
+					<div class="line-gray"></div>	
+				</div>
+
+				<div class="row" id="cards"></div>
+				
+			</section>
+		</div>
+
+		<section class="section-newsletter">
+			<div class="offers">
+				<h2>¡Únete a nuestras novedades y promociones!</h2>
+				<form class="form-newsletter" id="formNewsletter">
+					<input type="text" id="name" name="name" placeholder="Ingresa tu nombre">
+					<input type="email" id="email" name="email" placeholder="Ingresa tu correo">
+					<button>Subscribirme</button>
+				</form>
+			</div>
+		</section>
+
+		<div class="footer-car">
+			<div class="container">
+			  <div class="row">
+			    <div class="col-sm-4">
+			      <h2>Ubicación</h2>
+			      <div class="line-gray line-white"></div>
+			      <p>Avenida Andrômeda, 2000. Bloco 6 e 8 Alphavile SP brasil@corebiz.ag +55 11 3090 1039</p>
+			    </div>
+			    <div class="col-sm-4">
+			    	<div class="contacto-btns">
+			    		<a href="#."><i class="fa-solid fa-envelope"></i> Contactanos</a>
+			      		<a href="#."><i class="fa-solid fa-headphones"></i> Habla con un consultor</a>
+			    	</div>
+			    
+			    </div>
+			    <div class="col-sm-4 logos-corebiz">
+			      <span>Desarrollado</span>
+			      <img src="img/logo.png">
+			    </div>
+			  </div>
+			</div>
+		</div>
+
+	</div><!-- content wrap-->
+
+	<!-- Modal Carrito  -->
+	<div class="modal fade" id="carritoModal" tabindex="-1" role="dialog" aria-labelledby="carritoModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="carritoModalLabel">Carrito</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <table class="table">
+	                <thead>
+	                  <tr>
+	                    <th scope="col">#</th>
+	                    <th scope="col">Producto</th>
+	                    <th scope="col">Cantidad</th>
+	                    <th scope="col"></th>
+	                    <th scope="col">Total</th>
+	                  </tr>
+	                </thead>
+	                <tbody id="items"></tbody>
+	                <tfoot>
+	                     <tr id="footer">
+	                       <th scope="row" colspan="5"> ¡Tu Carrito vacío!</th>
+	                     </tr>
+	                </tfoot>
+	        </table>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	
+	<!-- Templates para dibujar elementos -->
+	<template id="template-card">
+	     <div class="col-12 mb-2 col-md-3">
+	       <div class="card">
+	       	<img src="">
+	         <div class="card-body">
+	           <h5>Titulo</h5>
+	           <p>precio</p>
+	           <button class="btn btn-dark btn-comprar">Comprar</button>
+	         </div>
+	       </div>
+	     </div>
+	</template>
+	    
+	<template id="template-carrito">
+	  <tr>
+	    <th scope="row">id</th>
+	    <td>Producto</td>
+	    <td>1</td>
+	    <td>
+	    </td>
+	    <td>$ <span>500</span></td>
+	  </tr>
+	</template>
+
+	 <template id="template-footer">
+        <th scope="row" colspan="2">Total productos</th>
+        <td>10</td>
+        <td>
+            <button class="btn btn-danger btn-sm" id="vaciar-carrito">
+                vaciar carrito
+            </button>
+        </td>
+        <td class="font-weight-bold">$ <span>5000</span></td>
+
+    </template>
+
+
+    <!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+	<!--Bootstrap js -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<!-- JavaScript Flickity Slider-->
+	<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+	<script>
+
+		//-----Inician las funcionalidades del carrito----
+		const cards = document.getElementById('cards');
+		const items = document.getElementById('items');
+		const footer = document.getElementById('footer');
+		const templateCard = document.getElementById('template-card').content
+		const templateFooter = document.getElementById('template-footer').content
+		const templateCarrito = document.getElementById('template-carrito').content
+
+		const fragment = document.createDocumentFragment();
+		let carrito = {}
+
+		 
+		document.addEventListener('DOMContentLoaded', () =>{
+			//-- Cargar datos de la API dentra de la pagina
+			fetchData();
+
+			//-- Buscar en el localstorage si hay productos en el carrito
+			if (localStorage.getItem('carrito')) {
+			       carrito = JSON.parse(localStorage.getItem('carrito'))
+			       pintarCarrito()
+			   }
+		})
+
+		// --- Al dar click en las cards Llama a la funcion addCarrito para mandarle su info
+		cards.addEventListener('click', e => {
+			addCarrito(e);
+		})
+
+
+		//---- Conectar a la API de productos ------
+		const fetchData = async () =>{
+	      try {
+	          const url = "https://corebiz-test.herokuapp.com/api/v1/products"
+	          const respuesta = await fetch(url)
+	          const resultado = await respuesta.json();
+	          pintarCards(resultado)
+	      } catch (error) {
+	          console.log(error);
+	      }
+		}
+		
+
+		//--- Pintar Cards de productos
+		const pintarCards = data => {
+		    data.forEach(producto => {
+		       	templateCard.querySelector('h5').textContent = producto.productName;
+		        templateCard.querySelector('p').textContent = producto.price;
+		        templateCard.querySelector('img').setAttribute("src", producto.imageUrl); 
+		        templateCard.querySelector('button').dataset.id = producto.productId;
+		        const clone = templateCard.cloneNode(true);
+		        fragment.appendChild(clone);
+		    })
+		   cards.appendChild(fragment);
+		}
+
+		//--- Agregar al carrito
+		const addCarrito = e => {
+		    if (e.target.classList.contains('btn-dark')) {
+		        setCarrito(e.target.parentElement);
+		        openModalCarrito();
+		    }
+		    e.stopPropagation();
+		}
+
+		//Capturar datos y Generar nuevo objeto de los productos que compramos
+		const setCarrito = item => {
+		    const producto = {
+		    	id: item.querySelector('button').dataset.id,
+		        title: item.querySelector('h5').textContent,
+		        precio: item.querySelector('p').textContent,
+		        cantidad: 1
+		    }
+		    if (carrito.hasOwnProperty(producto.id)) {
+		        producto.cantidad = carrito[producto.id].cantidad + 1
+		    }
+
+		    carrito[producto.id] = { ...producto }
+		    pintarCarrito()
+		}
+
+
+		//--- Pintar Carrito
+		const pintarCarrito = () => {
+		    items.innerHTML = ''
+
+		    Object.values(carrito).forEach(producto => {
+		        templateCarrito.querySelector('th').textContent = producto.id
+		        templateCarrito.querySelectorAll('td')[0].textContent = producto.title
+		        templateCarrito.querySelectorAll('td')[1].textContent = producto.cantidad
+		        templateCarrito.querySelector('span').textContent = producto.precio * producto.cantidad
+		        
+
+		        const clone = templateCarrito.cloneNode(true)
+		        fragment.appendChild(clone)
+		    })
+		    items.appendChild(fragment)
+
+		    pintarFooter();
+		     localStorage.setItem('carrito', JSON.stringify(carrito))
+		}
+
+		//Pintar Carrito del carrito
+		const pintarFooter = () => {
+		    footer.innerHTML = ''
+		    
+		    if (Object.keys(carrito).length === 0) {
+		        footer.innerHTML = `
+		        <th scope="row" colspan="5">¡Carrito vacío!</th>
+		        `
+		        return
+		    }
+		    
+		    // sumar cantidad y sumar totales
+		    const nCantidad = Object.values(carrito).reduce((acc, { cantidad }) => acc + cantidad, 0)
+		    const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio ,0)
+		    // console.log(nPrecio)
+
+		    templateFooter.querySelectorAll('td')[0].textContent = nCantidad
+		    templateFooter.querySelector('span').textContent = nPrecio
+
+		    const clone = templateFooter.cloneNode(true)
+		    fragment.appendChild(clone)
+
+		    footer.appendChild(fragment)
+
+		    const boton = document.querySelector('#vaciar-carrito')
+		    boton.addEventListener('click', () => {
+		        carrito = {}
+		        pintarCarrito()
+		    })
+
+		}
+
+		/*Modal del Carrito*/
+		function openModalCarrito(){
+			$('#carritoModal').modal('show');
+		}
+
+
+
+
+
+
+		//Funcion Valider Newslatter
+
+		document.addEventListener("DOMContentLoaded", function() {
+		  document.getElementById("formNewsletter").addEventListener('submit', validarFormulario); 
+		});
+
+		function validarFormulario(e) {
+		  e.preventDefault();
+
+		 const nombre = document.getElementById('name');
+		 const correo = document.getElementById('email');
+		 
+
+		  if (nombre.value === "") {
+		      alert("Por favor, escribe tu nombre de usuario.");
+		      nombre.focus();
+		      return false;
+		    }
+		    
+		    if (!emailVálido(email.value)) {
+		        alert("Por favor, escribe un correo electrónico válido");
+		        emailAddress.focus();
+		        return false;
+		      }
+
+		  this.submit();
+		}
+
+		/*Validar correo Valido*/
+		const emailVálido = email => {
+		  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+		}
+
+
+	</script>
+
+</body>
+</html>
